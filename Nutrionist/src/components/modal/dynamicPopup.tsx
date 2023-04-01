@@ -13,7 +13,6 @@ import {
   SafeAreaView,
   
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
 import theme from '@/assets/stylesheets/theme';
 import Theme from '@/assets/stylesheets/theme';
 import {FONT_FAMILY} from '@/constants/fontFamily';
@@ -177,7 +176,7 @@ const DynamicPopup = (props: Props) => {
     const [tabs, setTabs] = useState([
       {uuid: '1', name: 'By period'},
       {uuid: '2', name: 'By date'},
-      {uuid: '3', name: ''},
+      // {uuid: '3', name: ''},
     ]);
     const [days, setDays] = useState([
       {
@@ -213,7 +212,7 @@ const DynamicPopup = (props: Props) => {
       
       return (
         <TouchableOpacity
-          activeOpacity={1}
+          activeOpacity={2}
           onPress={() => {
             setTabIndex(index);
             if(item.name==="By date"){
@@ -229,9 +228,11 @@ const DynamicPopup = (props: Props) => {
             justifyContent: 'center',
             alignItems: 'center',
             //   alignSelf: 'center',
-            //   paddingHorizontal: 0,
-            width: '64%',
+              
+            // width: '70%',
             borderRadius: 25,
+            backgroundColor:"blue"
+            
           }}>
           <View
             style={{
@@ -239,9 +240,11 @@ const DynamicPopup = (props: Props) => {
               // width: '80%',
               height: 35,
               borderRadius: 10,
+              paddingHorizontal: 10,
               alignItems: 'center',
               justifyContent: 'center',
-              width: tabIndex == index ? '100%' : null,
+              width: "100%",
+              
             }}>
             <Text
               style={{
@@ -341,15 +344,50 @@ const DynamicPopup = (props: Props) => {
             alignSelf: 'center',
             borderRadius: 10,
             marginTop: 15,
+            
           }}>
-          <FlatList
+          {/* <FlatList
             data={tabs}
             renderItem={renderTabs}
             scrollEnabled={false}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{}}
-          />
+            style={{
+              width:"100%",
+              // backgroundColor:"red"
+            }}
+          /> */}
+           <View style={{flexDirection:"row"}}>
+         {tabs.map((item,index)=>{
+          return(
+            <>
+                <Text onPress={() => {
+            setTabIndex(index);
+            if(item.name==="By date"){
+              setDateModal(true);
+              setModalExecuted(7);
+              // dateRange();
+            }else if(item.name==="By period"){
+              setDateModal(false);
+              setModalExecuted(10);
+            }
+          }} style={{
+                color: tabIndex == index ? theme?.white : theme.darkGrey,
+                fontSize: 14.7,
+                width:"50%",
+                height:30,
+                borderRadius:10,
+                textAlign:"center",
+                paddingVertical:3,
+                backgroundColor:tabIndex == index ? theme?.activeTab : theme.lightGreyColor,
+                fontFamily: FONT_FAMILY?.MontserratMedium,
+              }}>{item.name}</Text>
+            </>
+          )
+            })} 
+        </View>
+          
         </View>
 
         <View
@@ -676,8 +714,8 @@ const DynamicPopup = (props: Props) => {
               fontSize: 18,
               fontFamily: FONT_FAMILY.MontserratSemiBold,
               color: theme?.black,
-            }}>
-            Filter by
+            }}> 
+            Filter by 
           </Text>
 
           <TouchableOpacity activeOpacity={0.9} onPress={onPressClose}>
