@@ -617,7 +617,7 @@ export default function FavouriteFood() {
 
   return (
     <ScrollView contentContainerStyle={{paddingBottom: 150}}>
-      <View
+      {/* <View
         style={{
           backgroundColor: theme?.border,
           width: '88%',
@@ -628,8 +628,8 @@ export default function FavouriteFood() {
           alignItems: 'center',
           borderRadius: 10,
           marginTop: 18,
-        }}></View>
-      <View
+        }}></View> */}
+      {/* <View
         style={{
           marginTop: 16,
         }}>
@@ -644,8 +644,28 @@ export default function FavouriteFood() {
           //   alignItems: 'center',
           // }}
         />
-      </View>
-
+      </View> */}
+ <View style={{flexDirection:"row",marginHorizontal:10}}>
+         {tabs.map((item,index)=>{
+          return(
+            <>
+                <Text onPress={() => {
+            setTabIndex(index);
+          }} style={{
+                color: tabIndex == index ? theme?.white : theme.darkGrey,
+                fontSize: 14.7,
+                width:"50%",
+                height:30,
+                borderRadius:10,
+                textAlign:"center",
+                paddingVertical:3,
+                backgroundColor:tabIndex == index ? theme?.activeTab : theme.lightGreyColor,
+                fontFamily: FONT_FAMILY?.MontserratMedium,
+              }}>{item.name}</Text>
+            </>
+          )
+            })} 
+        </View>
       <View
         style={{
           width: '90%',
